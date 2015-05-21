@@ -21,12 +21,22 @@ $(function(){
       hideModal : 'hide.bs.modal'
     };
 
+  /*
+   *  =======================================================
+   *  以下が実際のサンプルコードです
+   *  =======================================================
+   * */
+
+  //コンテナ内のaタグを監視
   $container.on(E.click, target, function (e) {
     var $that = $(e.target);
     url = iframeFile+'?q=' + $that.data('param');
+
+    //aタグのデータ属性を渡して生成したiframeをappendする
     $modalBody.append(setIframeObject(url));
   });
 
+  //iframeを生成して渡す
   var setIframeObject = function(url){
     var ifo = document.createElement('IFRAME');
     ifo.src = url;
@@ -35,6 +45,7 @@ $(function(){
 
   //hideイベントはモーダルが1画面中1つなので、onで監視するコストを避ける
   $modal.bind(E.hideModal, function() {
+    //modalのhideイベントでiframeを破棄
     $modalBody.empty();
   });
 
